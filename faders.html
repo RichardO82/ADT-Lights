@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>LED Bar Setup</title>
+  <style>
+
+
+
+
+    body {
+            font-family: Arial, sans-serif;*/
+          /*  background-image: url('https://richardo82.github.io/Homepage/water.jpg'); /* Set the background image */
+          /*  background-size: cover; /* Cover the entire background */
+          /*  background-position: center; /* Center the image */
+          /*  color: white; /* Change text color for better visibility */
+    }
+    p {
+        margin: 0;
+    }
+
+
+
+     select {
+          display: flex;
+          justify-content: flex-start;
+          gap: 10px;
+      }
+  </style>
+
+
+</head>
+
+
+
+<body>
+  <h1>LED Bar Setup</h1>
+
+
+
+
+
+<p style="font-size:20px"><br>Sunrise and Sunset Faders</p>
+
+
+
+
+
+<p><br></p>
+<a href="/">
+  <button>Go Back</button>
+</a>
+<p><br><br><br>Example Faders:</p>
+
+<!--<img src="/Faders.jpg" alt="Faders" width="320" height="240">
+
+<img src="/Faders-off.jpg" alt="Faders" width="320" height="240">
+-->   
+
+<svg width="610" height="310">
+        <!-- Draw a rectangle
+        <rect x="10" y="10" width="100" height="100" fill="blue" stroke="black" stroke-width="3"></rect>
+
+        Draw a circle
+        <circle cx="150" cy="50" r="30" fill="green"></circle> -->
+
+        <!-- Draw a line -->
+        <line x1="10" y1="250" x2="190" y2="150" stroke="red" stroke-width="2"></line>
+        <line x1="190" y1="150" x2="420" y2="150" stroke="red" stroke-width="2"></line>
+        <line x1="600" y1="250" x2="420" y2="150" stroke="red" stroke-width="2"></line>
+
+        <line x1="50" y1="250" x2="190" y2="110" stroke="green" stroke-width="2"></line>
+        <line x1="190" y1="110" x2="420" y2="110" stroke="green" stroke-width="2"></line>
+        <line x1="560" y1="250" x2="420" y2="110" stroke="green" stroke-width="2"></line>
+
+        <line x1="100" y1="250" x2="190" y2="100" stroke="blue" stroke-width="2"></line>
+        <line x1="190" y1="100" x2="420" y2="100" stroke="blue" stroke-width="2"></line>
+        <line x1="510" y1="250" x2="420" y2="100" stroke="blue" stroke-width="2"></line>
+
+        <line x1="190" y1="90" x2="190" y2="250" stroke="black" stroke-width="2"></line>
+        <line x1="420" y1="90" x2="420" y2="250" stroke="black" stroke-width="2"></line>
+
+        <line x1="0" y1="250" x2="610" y2="250" stroke="black" stroke-width="2"></line>
+
+
+        <line x1="100" y1="270" x2="190" y2="270" stroke="black" stroke-width="2"></line>
+        <line x1="50" y1="285" x2="190" y2="285" stroke="black" stroke-width="2"></line>
+        <line x1="10" y1="300" x2="190" y2="300" stroke="black" stroke-width="2"></line>
+        
+
+        <!-- Draw some text -->
+        <text x="200" y="140" font-family="Verdana" font-size="12" fill="black">Daylight Brightness Levels (0-255)</text>
+
+        <text x="170" y="80" font-family="Verdana" font-size="12" fill="black">On Time</text>
+        <text x="400" y="80" font-family="Verdana" font-size="12" fill="black">Off Time</text>
+
+        <text x="215" y="245" font-family="Verdana" font-size="12" fill="black">Time</text>
+
+        <text x="200" y="220" font-family="Verdana" font-size="12" fill="black" transform="rotate(-90,200,220)">Brightness</text>
+
+        <text x="200" y="270" font-family="Verdana" font-size="12" fill="black">Blue Fader Time</text>
+        <text x="200" y="285" font-family="Verdana" font-size="12" fill="black">Green Fader Time</text>
+        <text x="200" y="300" font-family="Verdana" font-size="12" fill="black">Red Fader Time</text>
+
+
+    </svg>
+
+<form action="/faders-update" method="POST">
+  <div class="select">
+
+
+    <p style="font-size:20px"><br><br>Daylight Brightness Levels:</p>
+
+    <p><br>How bright should each LED be in full daylight (maximum brightness)?  Enter 0-255 for each color.</p>
+
+    <p><br>   LED Strip Daylight Brightness (0-255):</p>
+
+    <label for="stripRday"><br>Red:</label>
+    <input type="text" id="stripRday" name="stripRday">
+  
+    <label for="stripGday">Green:</label>
+    <input type="text" id="stripGday" name="stripGday">
+  
+    <label for="stripBday">Blue:</label>
+    <input type="text" id="stripBday" name="stripBday">
+
+    
+    <p><br><br>  Ambient LEDs Daylight Brightness (0-255):</p>
+
+    <label for="ambiWday"><br>White:</label>
+    <input type="text" id="ambiWday" name="ambiWday">
+  
+    <label for="ambiUVday">UV:</label>
+    <input type="text" id="ambiUVday" name="ambiUVday">
+
+
+
+
+    <p style="font-size:20px"><br>Fader Times:</p>
+
+    <p><br>How long should each fader last in minutes?  All sunrise faders reach full brightness (set above) at the same time, and all sunset faders start at full brightness at the same time, so longer faders will extend further from the on or off times than shorter faders.</p>
+
+
+    <p><br>   LED Strip Fader Time (minutes):</p>
+
+    <label for="stripRfade"><br>Red:</label>
+    <input type="text" id="stripRfade" name="stripRfade">
+  
+    <label for="stripGfade">Green:</label>
+    <input type="text" id="stripGfade" name="stripGfade">
+  
+    <label for="stripBfade">Blue:</label>
+    <input type="text" id="stripBfade" name="stripBfade">
+
+    
+    <p><br><br>  Ambient LEDs Fader Time (minutes):</p>
+
+    <label for="ambiWfade"><br>White:</label>
+    <input type="text" id="ambiWfade" name="ambiWfade">
+  
+    <label for="ambiUVfade">UV:</label>
+    <input type="text" id="ambiUVfade" name="ambiUVfade">
+
+    <p><br><br></p>
+
+  </div>
+
+  <input type="submit" value="Set Faders">
+</form>
+
+
+<p><br></p>
+
+
+
+
+<p style="font-size:20px"><br><br>ESP32 Data:</p>
+<div id="data"></div> <!-- Container for dynamically created elements -->
+
+<script>
+    // Function to fetch data from ESP32
+    function fetchData() {
+        fetch('/data')
+            .then(response => response.json())
+            .then(data => {
+                const container = document.getElementById('data');
+
+                // Clear previous data
+                container.innerHTML = '';
+
+                // Loop through each key-value pair in the JSON data
+                for (const key in data) {
+                    if (data.hasOwnProperty(key)) {
+                        // Create a new paragraph element
+                        const p = document.createElement('p');
+
+                        // Set the text content to display the key and value
+                        p.textContent = `${key}: ${data[key]}`;
+
+                        // Append the paragraph to the container
+                        container.appendChild(p);
+                    }
+                }
+            })
+            .catch(error => console.log('Error fetching data:', error));
+    }
+
+    // Fetch data every 1 seconds
+    setInterval(fetchData, 1000);
+
+    // Initial data fetch on page load
+    fetchData();
+</script>
+
+
+
+
+
+
+</body>
+</html>
