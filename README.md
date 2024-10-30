@@ -27,7 +27,7 @@ Start-up and Configuration:
 2.  Using a BLE Terminal App on your phone, find the BLE device "ESP32 LED Bar".
 3.  Send your Wifi SSID and password through BLE serial:  To send SSID, send the string ".s[ssid]", where [ssid] is your SSID, for example if my SSID is "FBIVan34" I would send ".sFBIVan34" (without quotes).  Your terminal app may give errors, ignore them.
 4.  To send password, send the string ".p[pass]", where [pass] is your password, for example if my password is "apass" I would send ".papass" (without quotes).  After this command the ESP32 will reboot.
-5.  As the ESP32 is booting up after reboot, it will connect to your wifi and display it's IP address.  Reboot to display IP address again if needed by disconnecting and reconnecting power.
+5.  After reboot, the ESP32 will connect to your wifi and display it's IP address.  Reboot to display the IP address again if needed by disconnecting and reconnecting power.
 6.  In a web browser, type the IP address in the address bar to navigate to the ESP32's webserver and configure the options.
 
 
