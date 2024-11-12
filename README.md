@@ -37,6 +37,6 @@ Start-up and Configuration:
 
   The PCB which is mostly populated also connects to and supplies power to the LED strip.  The last PCB at the opposite end of the bar is where the middle of the LED strip is split and connected in a U-turn to run back down the bar.  So there are a lot of footprints on the PCBs, but a lot of them are left unpopulated on most of the boards and are only used for specific purposes.  The LED strip will go over some of the unpopulated footprints.  It is important to keep the double sided sticky tape on the LED strip as insulation to prevent contact with the unpopulated footprints on the PCB, and also to secure the strip.
 
-  A couple of things to note, the UV LEDs (sparkfun) have a less than ideal viewing angle (45 deg. on datasheet) that is essentially a narrow beam, so they don't fill the space well and give a stripped look.  If there is a UV LED in the same package that has a higher viewing angle, that would be an improvement.  Also, a waterproof closure with UV transmissive acryllic is needed.
+  A couple of things to note, the UV LEDs (sparkfun) have a less than ideal viewing angle (45 deg. on datasheet) that is essentially a narrow beam, so they don't fill the space well and give a striped look.  If there is a UV LED in the same package that has a higher viewing angle, that would be an improvement.  Also, a waterproof closure with UV transmissive acryllic is needed.
 
   
