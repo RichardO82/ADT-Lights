@@ -1,4 +1,5 @@
 # ADT-Lights
+![alt text](relative%20path/Fusion/ATD-Lights-SCH.jpg?raw=true "Title")
 Fish tank light with an LED Strip and additional ambient LEDs controlled by an ESP32 with Annual Daylight Timer (ADT) functionality.
 
 Requires a power supply capable of continuously delivering 4 amps at 5 volts.  Also requires an LED Strip, UV LEDs, a Qwiic Pro Mini microcontroller, and a Qwiic Alphanumeric Display.
