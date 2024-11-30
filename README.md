@@ -1,4 +1,5 @@
 # ADT-Lights
+![alt_text](https://github.com/RichardO82/ADT-Lights/blob/main/Fusion/Tracks.jpg)
 ![alt text](https://github.com/RichardO82/ADT-Lights/blob/main/Fusion/ADT-Lights-SCH.jpg)
 Fish tank light with an LED Strip and additional ambient LEDs controlled by an ESP32 with Annual Daylight Timer (ADT) functionality.
 
