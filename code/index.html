@@ -1,0 +1,598 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>LED Bar Setup</title>
+  <style>
+
+
+
+
+    body {
+            font-family: Arial, sans-serif;*/
+          /*  background-image: url('https://richardo82.github.io/Homepage/water.jpg'); /* Set the background image */
+          /*  background-size: cover; /* Cover the entire background */
+          /*  background-position: center; /* Center the image */
+          /*  color: white; /* Change text color for better visibility */
+    }
+    p {
+        margin: 0;
+    }
+
+    .slidecontainer {
+      width: 100%;
+    }
+    
+    .slider {
+      -webkit-appearance: none;
+      width: 25%;
+      height: 25px;
+      background: #d3d3d3;
+      outline: none;
+      opacity: 0.7;
+      -webkit-transition: .2s;
+      transition: opacity .2s;
+    }
+    
+    .slider:hover {
+      opacity: 1;
+    }
+    
+    .slider::-webkit-slider-thumb {
+      -webkit-appearance: none;
+      appearance: none;
+      width: 25px;
+      height: 25px;
+      background: #04AA6D;
+      cursor: pointer;
+    }
+    
+    .slider::-moz-range-thumb {
+      width: 25px;
+      height: 25px;
+      background: #04AA6D;
+      cursor: pointer;
+    }
+
+
+
+
+
+    .sliderR {
+      -webkit-appearance: none;
+      width: 25%;
+      height: 25px;
+      background: #d3d3d3;
+      outline: none;
+      opacity: 0.7;
+      -webkit-transition: .2s;
+      transition: opacity .2s;
+    }
+    
+    .sliderR:hover {
+      opacity: 1;
+    }
+    
+    .sliderR::-webkit-slider-thumb {
+      -webkit-appearance: none;
+      appearance: none;
+      width: 25px;
+      height: 25px;
+      background: rgb(255, 0, 0);
+      cursor: pointer;
+    }
+    
+    .sliderR::-moz-range-thumb {
+      width: 25px;
+      height: 25px;
+      background: rgb(255, 0, 0);
+      cursor: pointer;
+    }
+
+
+
+
+
+    .sliderG {
+      -webkit-appearance: none;
+      width: 25%;
+      height: 25px;
+      background: #d3d3d3;
+      outline: none;
+      opacity: 0.7;
+      -webkit-transition: .2s;
+      transition: opacity .2s;
+    }
+    
+    .sliderG:hover {
+      opacity: 1;
+    }
+    
+    .sliderG::-webkit-slider-thumb {
+      -webkit-appearance: none;
+      appearance: none;
+      width: 25px;
+      height: 25px;
+      background: rgb(0, 255, 0);
+      cursor: pointer;
+    }
+    
+    .sliderG::-moz-range-thumb {
+      width: 25px;
+      height: 25px;
+      background: rgb(0, 255, 0);
+      cursor: pointer;
+    }
+
+
+
+
+
+    .sliderB {
+      -webkit-appearance: none;
+      width: 25%;
+      height: 25px;
+      background: #d3d3d3;
+      outline: none;
+      opacity: 0.7;
+      -webkit-transition: .2s;
+      transition: opacity .2s;
+    }
+    
+    .sliderB:hover {
+      opacity: 1;
+    }
+    
+    .sliderB::-webkit-slider-thumb {
+      -webkit-appearance: none;
+      appearance: none;
+      width: 25px;
+      height: 25px;
+      background: rgb(0, 0, 255);
+      cursor: pointer;
+    }
+    
+    .sliderB::-moz-range-thumb {
+      width: 25px;
+      height: 25px;
+      background: rgb(0, 0, 255);
+      cursor: pointer;
+    }
+
+
+
+
+
+    .sliderUV {
+      -webkit-appearance: none;
+      width: 25%;
+      height: 25px;
+      background: #d3d3d3;
+      outline: none;
+      opacity: 0.7;
+      -webkit-transition: .2s;
+      transition: opacity .2s;
+    }
+    
+    .sliderUV:hover {
+      opacity: 1;
+    }
+    
+    .sliderUV::-webkit-slider-thumb {
+      -webkit-appearance: none;
+      appearance: none;
+      width: 25px;
+      height: 25px;
+      background: rgb(170, 120, 255);
+      cursor: pointer;
+    }
+    
+    .sliderUV::-moz-range-thumb {
+      width: 25px;
+      height: 25px;
+      background: rgb(170,120,255);
+      cursor: pointer;
+    }
+
+
+    
+
+    .file-list {
+      margin: 20px 0;
+     }
+     .file-item, .memory-info {
+      padding: 5px;
+     }
+
+
+
+
+     .time-select {
+          display: flex;
+          justify-content: flex-start;
+          gap: 10px;
+      }
+
+      select {
+          padding: 5px;
+          font-size: 16px;
+      }
+  </style>
+
+
+</head>
+
+
+
+<body>
+  <h1>LED Bar Setup</h1>
+
+  <p style="font-size:20px"><br>ESP32 SPIFFS File System</p>
+  <div class="memory-info" id="memoryInfo"></div>
+  <div class="file-list" id="fileList"></div>
+  
+<script>
+  // Fetch the file list and memory info from the server
+  fetch('/files')
+      .then(response => {
+          if (!response.ok) {
+              throw new Error('Network response was not ok');
+          }
+          return response.json();
+      })
+      .then(data => {
+          // Display memory info in KB
+          const memoryInfo = document.getElementById('memoryInfo');
+          const totalKB = (data.memory.total / 1024).toFixed(2);
+          const usedKB = (data.memory.used / 1024).toFixed(2);
+          const remainingKB = (data.memory.remaining / 1024).toFixed(2);
+          let percentage = (usedKB / totalKB) * 100;
+          memoryInfo.textContent = `Memory - Total: ${totalKB} KB, Used: ${usedKB} KB (${percentage.toFixed(2)}%) , Remaining: ${remainingKB} KB`;
+
+          // Display file list with sizes in KB
+          const fileList = document.getElementById('fileList');
+          if (data.files.length === 0) {
+              fileList.textContent = 'No files found.';
+          } else {
+              fileList.textContent = 'Files:';
+              data.files.forEach(file => {
+                  let fileSizeKB = (file.size / 1024).toFixed(2); // Convert file size to KB
+                  let p = document.createElement('p');
+                  p.className = 'file-item';
+                  p.textContent = `${file.name} : ${fileSizeKB} KB`;
+                  fileList.appendChild(p);
+              });
+          }
+      })
+      .catch(error => console.error('Error fetching file list and memory info:', error));
+</script>
+
+
+
+
+
+
+
+
+
+  <p><br>Upload Files:</p>
+
+  <!-- Form to upload a new index.html -->
+  <form method="POST" action="/upload" enctype="multipart/form-data">
+    <input type="file" name="file">
+    <button type="submit">Upload</button>
+  </form>
+
+
+  
+
+
+
+
+<p style="font-size:20px"><br><br><br>Annual Daylight Timer Controls</p>
+
+<p><br>The Annual Daylight Timer (ADT) controls on and off times for each day to simulate the seasonal changes in day length (sine wave approximation).</p>
+<p>The Faders Page controls parameters that determine sunrise and sunset color fades at the calculated on and off times.</p>
+<p><br></p>
+<a href="/faders.html">
+  <button>Go to Faders Page</button>
+</a>
+<p><br><br></p>
+
+
+<p>Set the Date:</p>
+
+<form action="/submit-date" method="POST">
+  <div class="time-select">
+
+    <select name="year" id="year">
+      <option value="" disabled selected>Year</option>
+      <option value="24">2024</option>
+      <option value="25">2025</option>
+      <option value="26">2026</option>
+      <option value="27">2027</option>
+      <option value="28">2028</option>
+      <option value="29">2029</option>
+      <option value="30">2030</option>
+      <option value="31">2031</option>
+      <option value="32">2032</option>
+      <option value="33">2033</option>
+      <option value="34">2034</option>
+      <option value="35">2035</option>
+      <option value="36">2036</option>
+      <option value="37">2037</option>
+      <option value="38">2038</option>
+      <option value="39">2039</option>
+      <option value="40">2040</option>
+    </select>
+
+    <select name="month" id="month">
+      <option value="" disabled selected>Month</option>
+      <option value="1">Jan</option>
+      <option value="2">Feb</option>
+      <option value="3">Mar</option>
+      <option value="4">Apr</option>
+      <option value="5">May</option>
+      <option value="6">Jun</option>
+      <option value="7">Jul</option>
+      <option value="8">Aug</option>
+      <option value="9">Sep</option>
+      <option value="10">Oct</option>
+      <option value="11">Nov</option>
+      <option value="12">Dec</option>
+    </select>
+
+
+
+    <label for="day"><br>Day:</label>
+    <input type="text" id="day" name="day"><br><br>
+  
+  </div>
+
+  <input type="submit" value="Set Date">
+</form>
+
+
+<p><br></p>
+
+<p>Set the Time:</p>
+<form action="/submit-time" method="POST">
+  <div class="time-select">
+
+    <label for="hour"><br>Hour:</label>
+    <input type="text" id="hour" name="hour"><br><br>
+  
+    <label for="minute"><br>Minute:</label>
+    <input type="text" id="minute" name="minute"><br><br>
+  
+    <label for="second"><br>Second:</label>
+    <input type="text" id="second" name="second"><br><br>
+  
+  </div>
+
+  <input type="submit" value="Set Time">
+  
+<!-- Button to trigger ESP32 action -->
+<button id="triggerButton">Set Time to Network</button>
+
+</form>
+
+<p><br><br></p>
+
+<p>Set the ADT:</p>
+
+<p><br>Avg. Day Length is the average day length over a year (usually 12 hours, but you might want shorter or longer days).</p>
+<p>Amplitude is the difference in day length between summer and winter.</p>
+<p>For Example: With Avg. Day Length=10 and Amplitude=3, day length will be 11.5 hours on the summer solstice and 8.5 hours on the winter solstice.</p>
+<p>The total length of a day+night cycle is fixed at 24 hours.</p>
+<p>Offset is how many hours to offset the clock (hours), for example, if the off time is 3pm, an offset of 1 will turn off at 4pm, and an offset of -1 will turn off at 2pm.</p>
+<p>Accepts partial (i.e. 3.6) hours. On and off times for each day are calculated through these perameters and can't be manually changed in ADT mode.<br><br></p>
+
+
+<form action="/submit-ADT" method="POST">
+  <div class="time-select">
+
+    <label for="avgday"><br>Avg. Day Length (hours):</label>
+    <input type="text" id="avgday" name="avgday"><br><br>
+  
+    <label for="amplitude"><br>Amplitude (hours):</label>
+    <input type="text" id="amplitude" name="amplitude"><br><br>
+
+    <label for="offset"><br>Offset (hours):</label>
+    <input type="text" id="offset" name="offset"><br><br>
+    
+  </div>
+
+  <input type="submit" value="Set ADT">
+</form>
+
+
+
+
+<p><br></p>
+
+<svg width="500" height="200" viewBox="0 0 500 300" style="border: 1px solid black;">
+
+  <defs>
+    <marker id="arrow" markerWidth="10" markerHeight="7" 
+            refX="0" refY="3.5" orient="auto">
+        <polygon points="0 0, 10 3.5, 0 7" fill="black" />
+    </marker>
+    <marker id="arrowback" markerWidth="10" markerHeight="7" 
+            refX="0" refY="3.5" orient="auto-start-reverse">
+        <polygon points="0 0, 10 3.5, 0 7" fill="black" />
+    </marker>
+</defs>
+
+<!-- Draw a line with an arrowhead -->
+<line x1="420" y1="235" x2="420" y2="115" 
+      stroke="green" stroke-width="2" marker-start="url(#arrowback)"marker-end="url(#arrow)" />
+
+<!-- Draw a line with an arrowhead -->
+<line x1="250" y1="160" x2="250" y2="40" 
+      stroke="red" stroke-width="2" marker-start="url(#arrowback)" marker-end="url(#arrow)" />
+
+
+
+
+  <!-- Drawing a sine wave -->
+  <path d="M 0 100 
+           C 50 0, 150 0, 200 100 
+           S 350 200, 400 100 
+           S 550 0, 600 100"
+        stroke="blue" stroke-width="2" fill="none" />
+
+
+
+
+  <line x1="100" y1="25" x2="100" y2="250" stroke="black" stroke-width="2" stroke-dasharray="15,5"></line>
+  <line x1="300" y1="175" x2="300" y2="250" stroke="black" stroke-width="2" stroke-dasharray="15,5"></line>
+  <line x1="-100" y1="250" x2="600" y2="250" stroke="black" stroke-width="2"></line>
+  <line x1="-100" y1="250" x2="-100" y2="-400" stroke="black" stroke-width="2"></line>
+
+  <line x1="-100" y1="100" x2="600" y2="100" stroke="green" stroke-width="2" stroke-dasharray="30,10"></line>
+  <line x1="-100" y1="25" x2="600" y2="25" stroke="red" stroke-width="2" stroke-dasharray="15,5"></line>
+  <line x1="-100" y1="175" x2="600" y2="175" stroke="red" stroke-width="2" stroke-dasharray="15,5"></line>
+
+
+  <text x="-70" y="265" font-family="Verdana" font-size="12" fill="black">Time</text>
+
+  <text x="-110" y="220" font-family="Verdana" font-size="12" fill="blue" transform="rotate(-90,-110,220)">Day Length</text>
+
+  <text x="110" y="240" font-family="Verdana" font-size="12" fill="black">Summer</text>
+  <text x="310" y="240" font-family="Verdana" font-size="12" fill="black">Winter</text>
+
+
+  <text x="260" y="50" font-family="Verdana" font-size="24" fill="red">Amplitude</text>
+  <text x="430" y="150" font-family="Verdana" font-size="24" fill="green">Avg.DayLength</text>
+
+</svg>
+
+
+<script>
+    document.getElementById("triggerButton").addEventListener("click", function() {
+        // Send a request to ESP32
+        fetch('/setNetTime')
+        .then(response => response.text())
+        .then(data => {
+            console.log("ESP32 response:", data);
+        })
+        .catch(error => console.error("Error:", error));
+    });
+</script>
+
+<p style="font-size:20px"><br><br><br>LED Controls</p>
+
+
+<!-- Form to submit values to the ESP32 -->
+<form action="/submit-LED" method="POST">
+  <!-- Text Field -->
+  <label for="codeString"><br>Command String:</label>
+  <input type="text" id="codeString" name="codeString"><br><br>
+
+  <!-- Dropdown -->
+  <label for="Pattern">Function Select:</label>
+  <select id="Pattern" name="Pattern">
+    <option value="0">Annual Daylight Timer</option>
+    <option value="1">Warm White Shimmer</option>
+    <option value="2">Random Color Walk</option>
+    <option value="3">Traditional Colors</option>
+    <option value="4">Color Explosion</option>
+    <option value="5">Gradient</option>
+    <option value="6">Bright Twinkle</option>
+    <option value="7">Collision</option>
+    <option value="8">All Bright</option>
+    <option value="9">Single Spot</option>
+    <option value="10">All Manual</option>
+    <option value="255">All Off</option>
+  </select><br><br>
+
+  <!-- Slider -->
+  <label for="globalBrightness">LED Strip Brightness:</label>
+  <input type="range" id="globalBrightness" name="globalBrightness" min="0" max="31" value="31" class="slider"><br><br>
+
+
+  <p><br>Brightness Controls for non-ADT Modes:</p>
+
+  <!-- Slider -->
+  <label for="stripDelay">LED Strip Pattern Delay:</label>
+  <input type="range" id="stripDelay" name="stripDelay" min="0" max="31" value="31" class="slider"><br><br>
+
+  <!-- Slider -->
+  <label for="duty_W">Ambient White Brightness:</label>
+  <input type="range" id="duty_W" name="duty_W" min="0" max="255" value="0" class="slider"><br><br>
+
+  <!-- Slider -->
+  <label for="duty_UV">Ambient UV Brightness:</label>
+  <input type="range" id="duty_UV" name="duty_UV" min="0" max="255" value="0" class="sliderUV"><br><br>
+
+  <!-- Slider -->
+  <label for="duty_G">Strip Red Brightness:</label>
+  <input type="range" id="duty_R" name="duty_R" min="0" max="255" value="0" class="sliderR"><br><br>
+
+  <!-- Slider -->
+  <label for="duty_G">Strip Green Brightness:</label>
+  <input type="range" id="duty_G" name="duty_G" min="0" max="255" value="0" class="sliderG"><br><br>
+
+  <!-- Slider -->
+  <label for="duty_B">Strip Blue Brightness:</label>
+  <input type="range" id="duty_B" name="duty_B" min="0" max="255" value="0" class="sliderB"><br><br>
+
+  <!-- Submit Button -->
+  <button type="submit">Submit</button>
+</form>
+
+
+
+
+
+
+
+
+
+<p style="font-size:20px"><br><br>ESP32 Data:</p>
+<div id="data"></div> <!-- Container for dynamically created elements -->
+
+<script>
+    // Function to fetch data from ESP32
+    function fetchData() {
+        fetch('/data')
+            .then(response => response.json())
+            .then(data => {
+                const container = document.getElementById('data');
+
+                // Clear previous data
+                container.innerHTML = '';
+
+                // Loop through each key-value pair in the JSON data
+                for (const key in data) {
+                    if (data.hasOwnProperty(key)) {
+                        // Create a new paragraph element
+                        const p = document.createElement('p');
+
+                        // Set the text content to display the key and value
+                        p.textContent = `${key}: ${data[key]}`;
+
+                        // Append the paragraph to the container
+                        container.appendChild(p);
+                    }
+                }
+            })
+            .catch(error => console.log('Error fetching data:', error));
+    }
+
+    // Fetch data every 1 seconds
+    setInterval(fetchData, 1000);
+
+    // Initial data fetch on page load
+    fetchData();
+</script>
+
+
+
+
+
+
+</body>
+</html>
