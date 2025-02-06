@@ -791,6 +791,9 @@ void ReCalcADT(void) {
       break;
   }
 
+  yearFraction += 171.0;
+  if(yearFraction > 364.0) yearFraction -= 365.0;
+
   yearFraction = yearFraction / 365.0;
 
   now_amplitude = cos( 2 * PI * yearFraction) * amplitude + avgday;
