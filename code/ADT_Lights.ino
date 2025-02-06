@@ -791,7 +791,7 @@ void ReCalcADT(void) {
       break;
   }
 
-  yearFraction += 171.0;
+  yearFraction += 171.0;        // Offset year to start at Jun 21st (spring equinox).
   if(yearFraction > 364.0) yearFraction -= 365.0;
 
   yearFraction = yearFraction / 365.0;
