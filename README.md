@@ -1,8 +1,5 @@
 # ADT-Lights
-![alt_text](https://github.com/RichardO82/ADT-Lights/blob/main/Fusion/Tracks.jpg)
-![alt_text](https://github.com/RichardO82/ADT-Lights/blob/main/SetupScreen.jpg)
-![alt_text](https://github.com/RichardO82/ADT-Lights/blob/main/FadersScreen.jpg)
-![alt text](https://github.com/RichardO82/ADT-Lights/blob/main/Fusion/ADT-Lights-SCH.jpg)
+
 Fish tank light with an LED Strip and additional ambient LEDs controlled by an ESP32 with Annual Daylight Timer (ADT) functionality.
 
 Requires a power supply capable of continuously delivering 4 amps at 5 volts.  Also requires an LED Strip, UV LEDs, a Qwiic Pro Mini microcontroller, and a Qwiic Alphanumeric Display.
@@ -43,5 +40,8 @@ Start-up and Configuration:
 
   A couple of things to note, the UV LEDs (sparkfun) have a less than ideal viewing angle (45 deg. on datasheet) that is essentially a narrow beam, so they don't fill the space well and give a striped look.  If there is a UV LED in the same package that has a higher viewing angle, that would be an improvement.  Also, a waterproof closure with UV transmissive acryllic is needed.
 
-  
+![alt_text](https://github.com/RichardO82/ADT-Lights/blob/main/Fusion/Tracks.jpg)
+![alt_text](https://github.com/RichardO82/ADT-Lights/blob/main/SetupScreen.jpg)
+![alt_text](https://github.com/RichardO82/ADT-Lights/blob/main/FadersScreen.jpg)
+![alt text](https://github.com/RichardO82/ADT-Lights/blob/main/Fusion/ADT-Lights-SCH.jpg)
 ![alt_text](https://github.com/RichardO82/ADT-Lights/blob/main/ADT-Lights.jpg)
