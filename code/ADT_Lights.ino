@@ -3,7 +3,7 @@
 //               Board: ESP32 Dev Module
 //          Flash size: 8MB
 //    Partition Scheme: 8MB with SPIFFS
-//               PSRAM: Enabled
+//               PSRAM: Enabled or Disabled
 
 
 
