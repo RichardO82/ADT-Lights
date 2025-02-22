@@ -23,7 +23,7 @@ All other components are listed in the BOM.  Hardware size is M3x16mm.
 
 
 Initial Setup:
-1.  Update SPIFFS_Uploader.ino with your network ssid and password and flash to ESP32 (configuration settings are in the comments at the top of in ADT_Lights.ino).
+1.  Update SPIFFS_Uploader.ino with your network ssid and password and flash to ESP32 (configuration settings are in the comments at the top of in ADT_Lights.ino).  This is temporary, we will overwrite the program with ADT_Lights.ino in step 3.
 2.  Upload index.html and faders.html to the ESP32 using the uploader.
 3.  Flash ADT_Lights.ino to the ESP32.
 
